@@ -99,7 +99,7 @@ class Bank:
     # Main Menu With Loop
     def run(self):
         while True:
-            print("Menu Options\n1. Create Account\n2. Deposit\n3. Withdraw\n4. Display\n5. Transactions\n6. Exit")
+            print("\nMenu Options\n1. Create Account\n2. Deposit\n3. Withdraw\n4. Display\n5. Transactions\n6. Exit")
             choice = int(input("Enter Choice Number: "))
 
             # Conditions To Choose Choice Options
