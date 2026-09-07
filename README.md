@@ -39,7 +39,8 @@ A command-line library system built using **OOP** for managing books, multiple c
 ### 🎓 5. Student Result Analyzer
 This project allows users to add students, store their marks, calculate total and average marks, assign grades, check pass/fail status, display all students, find passed students, and identify the top-performing student.
 
-**Concepts:** Object-Oriented Programming (OOP), Classes & Objects, Constructors, Instance Methods, Type Hints, List Comprehension, match-case, try-except, raise ValueError, enumerate(), Built-in functions like `sum()` and `max()
+**Concepts:** Object-Oriented Programming (OOP), Classes & Objects, Constructors, Instance Methods, Type Hints, List Comprehension, match-case, try-except, raise ValueError, enumerate(), Built-in functions like sum() and max()
+
 ---
 
 ## 🛠️ Technologies
