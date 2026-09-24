@@ -1,0 +1,26 @@
+[
+    {
+        "ticket_id": "FTB-5C841",
+        "vehicle": "bus",
+        "class": "business",
+        "source": "karachi",
+        "destination": "mirpurkhas",
+        "date": "25-09-2026",
+        "time": "07:00",
+        "passengers": 3,
+        "price_per_ticket": 3500,
+        "total_price": 10500
+    },
+    {
+        "ticket_id": "FTB-1A3FE",
+        "vehicle": "car",
+        "class": "business",
+        "source": "hyderabad",
+        "destination": "lahore",
+        "date": "25-09-2026",
+        "time": "05:05",
+        "passengers": 4,
+        "price_per_ticket": 4000,
+        "total_price": 16000
+    }
+]

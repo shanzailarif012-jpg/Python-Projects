@@ -1,0 +1,22 @@
+===== Fast Ticket Booker - Receipt =====
+Ticket ID: FTB-5C841
+Vehicle: bus
+Class: business
+From: karachi To: mirpurkhas
+Date: 25-09-2026 Time: 07:00
+Passengers: 3
+Price per Ticket: Rs. 3500
+Total Price: Rs. 10500
+=========================================
+
+===== Fast Ticket Booker - Receipt =====
+Ticket ID: FTB-1A3FE
+Vehicle: car
+Class: business
+From: hyderabad To: lahore
+Date: 25-09-2026 Time: 05:05
+Passengers: 4
+Price per Ticket: Rs. 4000
+Total Price: Rs. 16000
+=========================================
+
