@@ -43,6 +43,13 @@ This project allows users to add students, store their marks, calculate total an
 
 ---
 
+### 🎫 6. Fast Ticket Booker
+A command-line ticket booking system for booking Bus, Train, Car, and Van tickets across three travel classes, with automatic train discounts, unique ticket IDs, saved receipts, and full booking history.
+
+**Concepts:** Modular Programming (multi-file structure), Functions, Dictionaries, File Handling (.txt & .json), JSON Module, datetime Module, uuid Module, Input Validation, os Module
+
+---
+
 ## 🛠️ Technologies
 
 - 🐍 Python 3
