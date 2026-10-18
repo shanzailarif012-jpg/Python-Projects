@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Booking history - Fast Ticket Booker{% endblock %}
+{% block content %}
+<h1>Booking history</h1>
+
+{% if not tickets %}
+  <p class="lead">No bookings yet. Book your first ticket to see it here.</p>
+  <div class="actions"><a class="btn primary" href="{{ url_for('index') }}">Book ticket</a></div>
+{% else %}
+  <p class="lead">{{ tickets|length }} booking{{ '' if tickets|length == 1 else 's' }}, newest first.</p>
+  <div class="tablewrap">
+    <table class="history">
+      <thead>
+        <tr>
+          <th>Ticket ID</th><th>Trip</th><th>Vehicle</th><th>Date and time</th><th>Passengers</th><th class="num">Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in tickets %}
+        <tr>
+          <td class="mono">{{ t.ticket_id }}</td>
+          <td>{{ t.source }} to {{ t.destination }}</td>
+          <td>{{ t.vehicle|capitalize }}, {{ t['class'] }}</td>
+          <td>{{ t.date }}, {{ t.time }}</td>
+          <td>{{ t.passengers }}</td>
+          <td class="num">Rs. {{ t.total_price|money }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endif %}
+{% endblock %}

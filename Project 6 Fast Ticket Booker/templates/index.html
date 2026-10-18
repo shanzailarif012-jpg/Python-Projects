@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block content %}
+{% set f = form %}
+<h1>Book your ticket</h1>
+<p class="lead">Bus, train, car or van. Pick your trip and check the price before you confirm.</p>
+
+{% if errors %}
+<div class="errors" role="alert">
+  <strong>Please fix these:</strong>
+  <ul>{% for e in errors %}<li>{{ e }}</li>{% endfor %}</ul>
+</div>
+{% endif %}
+
+<form method="post" action="{{ url_for('review') }}" class="booking">
+
+  <fieldset>
+    <legend>Vehicle</legend>
+    <div class="choices four">
+      {% for v in ['bus', 'train', 'car', 'van'] %}
+      <label class="choice">
+        <input type="radio" name="vehicle" value="{{ v }}" {% if (f.get('vehicle') or 'bus') == v %}checked{% endif %}>
+        <span>{{ v|capitalize }}</span>
+      </label>
+      {% endfor %}
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Class</legend>
+    <div class="choices three">
+      {% for c in ['economy', 'business', 'sleeper'] %}
+      <label class="choice">
+        <input type="radio" name="travel_class" value="{{ c }}" {% if (f.get('travel_class') or 'economy') == c %}checked{% endif %}>
+        <span>{{ c|capitalize }}</span>
+        <small class="class-price" data-cls="{{ c }}"></small>
+      </label>
+      {% endfor %}
+    </div>
+    <p class="hint" id="train-note" hidden>Train tickets get a 5% discount.</p>
+  </fieldset>
+
+  <fieldset>
+    <legend>Route</legend>
+    <div class="row">
+      <label>From
+        <input type="text" name="source" value="{{ f.get('source', '') }}" placeholder="e.g. Hyderabad" required>
+      </label>
+      <label>To
+        <input type="text" name="destination" value="{{ f.get('destination', '') }}" placeholder="e.g. Karachi" required>
+      </label>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Travel time</legend>
+    <div class="row">
+      <label>Date
+        <input type="date" name="date" value="{{ f.get('date', '') }}" required>
+      </label>
+      <label>Time
+        <input type="time" name="time" value="{{ f.get('time', '') }}" required>
+      </label>
+      <label>Passengers
+        <input type="number" name="passengers" id="passengers" min="1" value="{{ f.get('passengers') or 1 }}" required>
+      </label>
+    </div>
+  </fieldset>
+
+  <div class="submitbar">
+    <div>
+      <span class="muted">Estimated total</span>
+      <strong id="live-total" class="total">-</strong>
+    </div>
+    <button type="submit" class="btn primary">Review booking</button>
+  </div>
+</form>
+
+<script>
+  const table = {{ price_table|tojson }};
+  const fmt = n => Number.isInteger(n)
+    ? n.toLocaleString("en-US")
+    : n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const picked = name => {
+    const el = document.querySelector('input[name="' + name + '"]:checked');
+    return el ? el.value : null;
+  };
+
+  function update() {
+    const v = picked("vehicle");
+    document.querySelectorAll(".class-price").forEach(el => {
+      const p = table[v][el.dataset.cls];
+      el.innerHTML = p.base !== p.final
+        ? "<s>Rs. " + fmt(p.base) + "</s> Rs. " + fmt(p.final)
+        : "Rs. " + fmt(p.base);
+    });
+    document.getElementById("train-note").hidden = (v !== "train");
+
+    const c = picked("travel_class");
+    const n = parseInt(document.getElementById("passengers").value, 10);
+    document.getElementById("live-total").textContent =
+      (c && n > 0) ? "Rs. " + fmt(table[v][c].final * n) : "-";
+  }
+
+  document.querySelectorAll(".booking input").forEach(el => el.addEventListener("input", update));
+  update();
+</script>
+{% endblock %}

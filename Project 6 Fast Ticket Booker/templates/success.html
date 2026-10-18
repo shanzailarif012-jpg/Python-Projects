@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Booking successful - Fast Ticket Booker{% endblock %}
+{% block content %}
+<h1>Booking successful</h1>
+<p class="lead">Your ticket is saved. Keep your ticket ID for reference.</p>
+
+<article class="ticket confirmed">
+  <div class="ticket-main">
+    <p class="route">{{ t.source }} <span class="to">to</span> {{ t.destination }}</p>
+    <dl class="facts">
+      <div><dt>Vehicle</dt><dd>{{ t.vehicle|capitalize }}</dd></div>
+      <div><dt>Class</dt><dd>{{ t['class']|capitalize }}</dd></div>
+      <div><dt>Date</dt><dd>{{ t.date }}</dd></div>
+      <div><dt>Time</dt><dd>{{ t.time }}</dd></div>
+      <div><dt>Passengers</dt><dd>{{ t.passengers }}</dd></div>
+      <div><dt>Price per ticket</dt><dd>Rs. {{ t.price_per_ticket|money }}</dd></div>
+    </dl>
+  </div>
+  <div class="ticket-stub">
+    <span class="muted">Ticket ID</span>
+    <strong class="ticket-id">{{ t.ticket_id }}</strong>
+    <span class="muted">Total paid</span>
+    <strong class="total">Rs. {{ t.total_price|money }}</strong>
+  </div>
+</article>
+
+<div class="actions">
+  <a class="btn primary" href="{{ url_for('index') }}">Book another ticket</a>
+  <a class="btn" href="{{ url_for('history') }}">View booking history</a>
+</div>
+{% endblock %}

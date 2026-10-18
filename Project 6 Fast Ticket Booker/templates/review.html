@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Confirm booking - Fast Ticket Booker{% endblock %}
+{% block content %}
+<h1>Confirm your booking</h1>
+<p class="lead">Check the details below. Your ticket is saved only after you confirm.</p>
+
+<article class="ticket">
+  <div class="ticket-main">
+    <p class="route">{{ t.source }} <span class="to">to</span> {{ t.destination }}</p>
+    <dl class="facts">
+      <div><dt>Vehicle</dt><dd>{{ t.vehicle|capitalize }}</dd></div>
+      <div><dt>Class</dt><dd>{{ t['class']|capitalize }}</dd></div>
+      <div><dt>Date</dt><dd>{{ t.date }}</dd></div>
+      <div><dt>Time</dt><dd>{{ t.time }}</dd></div>
+      <div><dt>Passengers</dt><dd>{{ t.passengers }}</dd></div>
+      <div>
+        <dt>Price per ticket</dt>
+        <dd>{% if discounted %}<s>Rs. {{ base_price|money }}</s> {% endif %}Rs. {{ t.price_per_ticket|money }}</dd>
+      </div>
+    </dl>
+  </div>
+  <div class="ticket-stub">
+    <span class="muted">Total</span>
+    <strong class="total">Rs. {{ t.total_price|money }}</strong>
+    <span class="idline">{{ t.ticket_id }}</span>
+  </div>
+</article>
+
+<form method="post" action="{{ url_for('confirm') }}" class="actions">
+  <button type="submit" name="action" value="yes" class="btn primary">Confirm booking</button>
+  <button type="submit" name="action" value="no" class="btn">Cancel</button>
+</form>
+{% endblock %}
