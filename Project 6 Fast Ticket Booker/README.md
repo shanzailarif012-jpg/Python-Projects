@@ -21,16 +21,27 @@ A simple command-line ticket booking system built in Python. Book tickets for **
 ```
 fast-ticket-booker/
 │
-├── main.py            # Entry point — menu loop (Book / View History / Exit)
-├── booking.py          # User input collection + validation (vehicle, route, date/time, passengers, class)
-├── pricing.py          # Price lookup, train discount, and total price calculation
-├── ticket.py            # Ticket ID generation + formatted receipt builder
-├── storage.py           # Saves bookings to .txt/.json, and loads booking history
+├── main.py            # Entry point for terminal version — menu loop (Book / View History / Exit)
+├── app.py             # Entry point for web version — Flask routes (book, review, confirm, history)
+├── booking.py         # User input collection + validation (vehicle, route, date/time, passengers, class)
+├── pricing.py         # Price lookup, train discount, and total price calculation
+├── ticket.py          # Ticket ID generation + formatted receipt builder
+├── storage.py         # Saves bookings to .txt/.json, and loads booking history
 │
 ├── data/
-│   └── prices.py        # Base prices for every vehicle and class
+│   └── prices.py      # Base prices for every vehicle and class
 │
-├── tickets/              # Auto-created — stores tickets.txt and tickets.json
+├── templates/         # HTML pages (Jinja2) for the web version
+│   ├── base.html      # Common layout (header, navigation, footer)
+│   ├── index.html     # Booking form with live price preview
+│   ├── review.html    # Review and confirm/cancel page
+│   ├── success.html   # Ticket confirmation page
+│   └── history.html   # Booking history table
+│
+├── static/
+│   └── style.css      # Styling for the web version
+│
+├── tickets/           # Auto-created — stores tickets.txt and tickets.json
 │
 └── README.md
 ```
@@ -52,8 +63,22 @@ fast-ticket-booker/
 
 ## 🖥️ Running the Project
 
+```## ▶️ How to Run
+
+**Terminal version**
+
 ```bash
 python main.py
+```
+
+**Web version**
+
+```bash
+pip install flask
+python app.py
+```
+
+Then open http://127.0.0.1:5000 in your browser.
 ```
 
 No external libraries required — built entirely with Python's standard library (`json`, `uuid`, `datetime`, `os`).
